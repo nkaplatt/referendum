@@ -3,6 +3,7 @@
 	function redirect_to($new_location) {
 		header("Location: " . $new_location);
 		exit;
+		
 	}
 	
 	function check_existance_card($session_id, $category_id, $card_id) {
