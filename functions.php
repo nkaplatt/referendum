@@ -1,60 +1,85 @@
 <?php
 
-	function redirect_to($new_location) {
+	function redirect_to_page($new_location) {
 		header("Location: " . $new_location);
 		exit;
+		
 	}
-	
-	function check_existance_card($session_id, $category_id, $card_id) {
-		global $connection;
-			
-		$session_id = mysqli_real_escape_string($connection, $session_id);
-		$category_id = mysqli_real_escape_string($connection, $category_id);
-        $card_id = mysqli_real_escape_string($connection, $card_id);
 
-		$query = "SELECT User_tbl.Session_ID FROM User_tbl, Footprint_tbl, Categories_tbl, Card_tbl WHERE User_tbl.Session_ID = Footprint.Session_ID AND Footprint_tbl.Category_ID = Category_tbl.Category_ID AND Footprint_tbl.Card_ID = Card_tbl.Card_ID AND Session_ID = '$session_id'";	
-		/*$query = "SELECT User_tbl.Session_ID ";
-		$query .= "FROM User_tbl ";
-        $query .= "INNER JOIN Footprint_tbl ON User_tbl.Session_ID = Footprint.Session_ID ";
-        $query .= "INNER JOIN Categories_tbl ON Footprint_tbl.Category_ID = Category_tbl.Category_ID ";
-        $query .= "INNER JOIN Card_tbl ON Footprint_tbl.Card_ID = Card_tbl.Card_ID ";*/
-        /*$query .= "WHERE Session_ID = '$session_id'";*/
-
-        $existance_card_set = mysqli_query($connection, $query);
-        echo gettype($existance_card_set);
-		/*confirm_query($existance_card_set);*/
-		if($row = mysqli_fetch_object($existance_card_set)) {
-			return true;
-	    } else {
-            return false;
-		}
-}
-
-	function confirm_query($result_set) {
+	function confirm_sql_query($result_set) {
 		if (!$result_set) {
 			die("Database query failed.");
 		}
 	}
 
-	function add_user($new_user, $new_password, $phone, $email) {
-		global $connection;
-		
-		$new_user = mysqli_real_escape_string($connection, $new_user);
-		$new_password = mysqli_real_escape_string($connection, $new_password);
-		$mobile = mysqli_real_escape_string($connection, $mobile);
-		$email = mysqli_real_escape_string($connection, $email);
-
-	
-		$query = "INSERT INTO registered (username, password, mobile, email) ";
-		$query .= "VALUES ('$new_user', '$new_password', '$mobile', '$email')";
-		return $query;
-	}
-
-    function insert_row() {
+    function escape_string($string_to_be_escaped) {
+        global $connection;
+        
+        $string_escaped = mysqli_real_escape_string($connection, $string_to_be_escaped);
+        return $string_escaped;
         
     }
 
-  /*  function return_store_value_sql($) {
+	function insert_new_user($new_session, $new_first_name, $new_last_name, $new_postcode, $new_email, $new_age) {
+		global $connection;
+		
+        $new_session = escape_string($new_session);
+		$new_first_name = escape_string($new_first_name);
+		$new_last_name = escape_string($new_last_name);
+		$new_postcode = escape_string($new_postcode);
+		$new_email = escape_string($new_email);
+        $new_age = escape_string($new_age);
+
+	
+		$query = "INSERT INTO User_tbl (Session_ID, Email, First_Name, Last_Name, Postcode, AGE) ";
+		$query .= "VALUES ('$new_session', '$new_email', '$new_first_name', '$new_last_name', '$new_postcode', $new_age)";
+		return $query;
+	}
+
+    function check_for_returned_user($session_id) {
+        global $connection;
         
-    }*/
+        $session_ID = escape_string($session_id);
+        
+        $stmt = "SELECT `First_Name`, `Last_Name` FROM `User_tbl` WHERE `Session_ID` = '$session_ID'"; 
+        return $stmt;
+    }
+
+    function add_reaction($reaction) {
+        global $connection;
+        
+        
+    }
+
+    function scoring() {
+        global $connection;
+        
+        
+    }
+
+    // dont need this function just reminds me to add this feature in the site later on.
+    function leave_script_in_form($script) {
+        global $connection;
+        
+        echo $script;
+    }
+
+    function validate_name($name) {
+        global $connection;
+            
+        if (!preg_match("/^[a-zA-Z ]*$/", $name)) {
+            $nameError = "Only letters and white space allowed";
+            return $nameError;
+        }
+    }
+
+    function validate_email($email) {
+        global $connection;
+            
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $emailError = "Invalid email format"; 
+            return $emailError;
+        }
+        
+    }
 ?>
