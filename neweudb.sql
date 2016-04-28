@@ -18,9 +18,9 @@ DROP TABLE IF EXISTS `Catoptions_tbl`;
 CREATE TABLE `Catoptions_tbl`(
 	Econ BIT(1),
 	Imo BIT(1),
-	Sov/Law BIT(1),
+	SovandLaw BIT(1),
 	Jobs BIT(1),
-	Defence/Security BIT(1),
+	DefenceandSecurity BIT(1),
 	nochosen INT(8),
 	);
 
