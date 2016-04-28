@@ -1,36 +1,42 @@
-
-CREATE TABLE User_tbl (
+CREATE DATABASE EU_db;
+DROP TABLE IF EXISTS `User_tbl`;
+CREATE TABLE `User_tbl` (
  Session_ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
  Email_Address VARCHAR(25),
  First_Name VARCHAR(25),
  Last_Name VARCHAR(25),
- Post_Code VARCHAR(25),
- AGE INT(3)
 );
 
-CREATE TABLE Categories_tbl (
-	Category_ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+DROP TABLE IF EXISTS `Card_tbl`;
+CREATE TABLE `Card_tbl` (
+	Card_ID INT NOT NULL PRIMARY KEY,
+	FOREIGN KEY (Category_ID) REFERENCES Categories_tbl(Category_ID),
+	Weight INT(4),
+);
+
+DROP TABLE IF EXISTS `Catoptions_tbl`;
+CREATE TABLE `Catoptions_tbl`(
+	Econ BIT(1),
+	Imo BIT(1),
+	Sov/Law BIT(1),
+	Jobs BIT(1),
+	Defence/Security BIT(1),
+	nochosen INT(8),
+	);
+
+DROP TABLE IF EXISTS `Categories_tbl`;
+CREATE TABLE `Categories_tbl` (
+	Category_ID INT NOT NULL PRIMARY KEY,
 	Name VARCHAR(10),
 	Weight INT(10),
-	No_Of_SubCards INT(10)
+	No_Of_SubCards INT(10),
 );
 
-CREATE TABLE Card_tbl (
-	Card_ID INT NOT NULL PRIMARY KEY,
-    Category_ID INT NOT NULL,
+DROP TABLE IF EXISTS `Foot_Print__tbl`;
+CREATE TABLE `Foot_Print_tbl` (
+	Category_ID INT NOT NULL PRIMARY KEY,
+	FOREIGN KEY (Session_ID) REFERENCES User_tbl(Session_ID),
 	FOREIGN KEY (Category_ID) REFERENCES Categories_tbl(Category_ID),
-	IS_STARRED TINYINT(1)
-);
-
-CREATE TABLE Footprint_tbl (
-	Footprint_ID INT NOT NULL PRIMARY KEY,
-    Session_ID INT NOT NULL,
-    FOREIGN KEY (Session_ID) REFERENCES User_tbl(Session_ID),
-    Category_ID INT NOT NULL,
-    FOREIGN KEY (Category_ID) REFERENCES Categories_tbl(Category_ID),
-    Card_ID INT NOT NULL,
 	FOREIGN KEY (Card_ID) REFERENCES Card_tbl(Card_ID),
-	Option_chosen INT(3)
+	Option_chosen INT(3),
 );
-
-CREATE INDEX Session_Index ON Footprint_tbl (Sessions_ID);
