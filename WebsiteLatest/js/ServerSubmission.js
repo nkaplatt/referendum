@@ -16,6 +16,6 @@ window.onload = function(){
       }
     }
 
-  		///do fun things in here, onclick will be called with i, the number of the kind of thing you've pressed
+  		///do fun things in here
   }
 };
