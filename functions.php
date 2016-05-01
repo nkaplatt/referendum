@@ -1,85 +1,64 @@
 <?php
-
-	function redirect_to_page($new_location) {
-		header("Location: " . $new_location);
-		exit;
-		
+function password_encrypt($password) {
+  	$hash_format = "$2y$10$";   // Tells PHP to use Blowfish with a "cost" of 10
+	  $salt_length = 22; 					// Blowfish salts should be 22-characters or more
+	  $salt = generate_salt($salt_length);
+	  $format_and_salt = $hash_format . $salt;
+	  $hash = crypt($password, $format_and_salt);
+		return $hash;
+	}
+	
+	function generate_salt($length) {
+	  // Not 100% unique, not 100% random, but good enough for a salt
+	  // MD5 returns 32 characters
+	  $unique_random_string = md5(uniqid(mt_rand(), true));
+	  
+		// Valid characters for a salt are [a-zA-Z0-9./]
+	  $base64_string = base64_encode($unique_random_string);
+	  
+		// But not '+' which is valid in base64 encoding
+	  $modified_base64_string = str_replace('+', '.', $base64_string);
+	  
+		// Truncate string to the correct length
+	  $salt = substr($modified_base64_string, 0, $length);
+	  
+		return $salt;
+	}
+	
+	function password_check($password, $existing_hash) {
+		// existing hash contains format and salt at start
+	  $hash = crypt($password, $existing_hash);
+	  if ($hash === $existing_hash) {
+	    return true;
+	  } else {
+	    return false;
+	  }
 	}
 
-	function confirm_sql_query($result_set) {
-		if (!$result_set) {
-			die("Database query failed.");
+	function attempt_login($username, $password) {
+		$admin = find_admin_by_username($username);
+		if ($admin) {
+			// found admin, now check password
+			if (password_check($password, $admin["hashed_password"])) {
+				// password matches
+				return $admin;
+			} else {
+				// password does not match
+				return false;
+			}
+		} else {
+			// admin not found
+			return false;
 		}
 	}
 
-    function escape_string($string_to_be_escaped) {
-        global $connection;
-        
-        $string_escaped = mysqli_real_escape_string($connection, $string_to_be_escaped);
-        return $string_escaped;
-        
-    }
-
-	function insert_new_user($new_session, $new_first_name, $new_last_name, $new_postcode, $new_email, $new_age) {
-		global $connection;
-		
-        $new_session = escape_string($new_session);
-		$new_first_name = escape_string($new_first_name);
-		$new_last_name = escape_string($new_last_name);
-		$new_postcode = escape_string($new_postcode);
-		$new_email = escape_string($new_email);
-        $new_age = escape_string($new_age);
-
-	
-		$query = "INSERT INTO User_tbl (Session_ID, Email, First_Name, Last_Name, Postcode, AGE) ";
-		$query .= "VALUES ('$new_session', '$new_email', '$new_first_name', '$new_last_name', '$new_postcode', $new_age)";
-		return $query;
+	function logged_in() {
+		return isset($_SESSION['admin_id']);
 	}
-
-    function check_for_returned_user($session_id) {
-        global $connection;
-        
-        $session_ID = escape_string($session_id);
-        
-        $stmt = "SELECT `First_Name`, `Last_Name` FROM `User_tbl` WHERE `Session_ID` = '$session_ID'"; 
-        return $stmt;
-    }
-
-    function add_reaction($reaction) {
-        global $connection;
-        
-        
-    }
-
-    function scoring() {
-        global $connection;
-        
-        
-    }
-
-    // dont need this function just reminds me to add this feature in the site later on.
-    function leave_script_in_form($script) {
-        global $connection;
-        
-        echo $script;
-    }
-
-    function validate_name($name) {
-        global $connection;
-            
-        if (!preg_match("/^[a-zA-Z ]*$/", $name)) {
-            $nameError = "Only letters and white space allowed";
-            return $nameError;
-        }
-    }
-
-    function validate_email($email) {
-        global $connection;
-            
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $emailError = "Invalid email format"; 
-            return $emailError;
-        }
-        
-    }
-?>
+	
+	function confirm_logged_in() {
+		if (!logged_in()) {
+			redirect_to("login.php");
+		}
+	}
+	?>
