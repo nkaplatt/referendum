@@ -1,26 +1,32 @@
+function update_server_data(type, num){
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.open("GET", "emotesDB.php?q=" + type + "&p=" + num, true);
+  xmlhttp.send();
+}
+
+
 window.onload = function(){
+
+var emoticons = ["anger", "shock", "indifferent", "happy", "delighted"];
 
   num = 100;
   for(var i=0; i<num; i++)
   {
-    var emoticons = ["anger", "shock", "indifferent", "happy", "delighted"];
-
-    for(var k=0; k<5; k++){
-      var exceptions = document.getElementsByClassName(emoticons[k]);
-
-      if(exceptions.length > 0){
-        exceptions[0].onclick = function(type){
-          alert(type);
-        }.bind(undefined, emoticons[k]);
-      }
-    }
-
     for(var j=0; j<5; j++) {
-  	   var emotes_array = document.getElementsByClassName(emoticons[j]+"-" + i);
 
-        if(emotes_array.length > 0){
-            emotes_array[0].onclick = function(type, num){
-             alert(type + num);
+       var string = emoticons[j] + "-" + i;
+
+       if(i == 0){
+          string = emoticons[j];
+       }
+
+  	   var emotes_array = document.getElementsByClassName(string);
+
+       if(emotes_array.length > 0){
+         emotes_array[0].onclick = function(type, num){
+
+           update_server_data(type, num);
+
          }.bind(undefined, emoticons[j], i);
       }
     }
