@@ -1,10 +1,10 @@
-CREATE DATABASE EU_db;
+CREATE DATABASE test;
 
 DROP TABLE IF EXISTS `User_tbl`;
 CREATE TABLE `User_tbl` (
  MUser_ID VARCHAR (64) PRIMARY KEY,
  Email_Address VARCHAR(100),
- UPassword VARCHAR(20),
+ UPassword VARCHAR(64),
  Econ BIT(1),
  Imo BIT(1),
  SovandLaw BIT(1),
@@ -30,5 +30,5 @@ CREATE TABLE `Card_tbl` (
 	Category_ID INT NOT NULL,
 	FOREIGN KEY (Category_ID) REFERENCES Categories_tbl(Category_ID),
 	CAWeight INT(4),
-  FOREIGN KEY (MUser_ID) REFERENCES User_tbl(MUser_ID),
+  FOREIGN KEY (MUser_ID) REFERENCES User_tbl(MUser_ID)
 );
