@@ -1,9 +1,14 @@
 function update_server_data(type, num){
   var xmlhttp = new XMLHttpRequest();
-  xmlhttp.open("GET", "emotesDB.php?q=" + type + "&p=" + num, true);
+  xmlhttp.open("GET", "http://localhost/latest/js/emotesDB.php?q=" + type + "&p=" + num, true);
+  /*xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                alert(xmlhttp.responseText);
+            }
+        };*/
+  alert("emotesDB.php?q=" + type + "&p=" + num);
   xmlhttp.send();
 }
-
 
 window.onload = function(){
 
