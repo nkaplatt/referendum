@@ -11,7 +11,8 @@ CREATE TABLE `User_tbl` (
  Jobs BIT(1),
  DefenceandSecurity BIT(1),
  Nochosen INT(8),
- Verified BIT(1)
+ Active BIT(1) NOT NULL DEFAULT '0',
+ Initialvote INT(1) NOT NULL
 );
 
 DROP TABLE IF EXISTS `Categories_tbl`;
