@@ -24,13 +24,17 @@ CREATE TABLE `Categories_tbl` (
 DROP TABLE IF EXISTS `Card_tbl`;
 CREATE TABLE `Card_tbl` (
 	Card_ID INT NOT NULL PRIMARY KEY,
-	FOREIGN KEY gg (Category_ID) REFERENCES Categories_tbl(Category_ID),
+	Category_ID INT NOT NULL,
+	FOREIGN KEY (Category_ID) REFERENCES Categories_tbl(Category_ID),
 	CAWeight INT(4)
 );
 
 DROP TABLE IF EXISTS `Foot_Print__tbl`;
 CREATE TABLE `Foot_Print_tbl` (
 	Footprint_ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	MUser_ID VARCHAR (64),
+	Category_ID INT NOT NULL,
+	Card_ID INT NOT NULL,
 	FOREIGN KEY (MUser_ID) REFERENCES User_tbl(MUser_ID),
 	FOREIGN KEY (Category_ID) REFERENCES Categories_tbl(Category_ID),
 	FOREIGN KEY (Card_ID) REFERENCES Card_tbl(Card_ID),
