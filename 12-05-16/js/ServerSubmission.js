@@ -39,3 +39,11 @@ window.onload = function(){
          }
            var emotes_array = document.getElementsByClassName(string);
          if(emotes_array.length > 0){
+           emotes_array[0].onclick = function(type, num){
+             update_server_data(type, num);
+           }.bind(undefined, emoticons[j], i);
+        }
+      }
+                ///do fun things in here
+  }
+};
