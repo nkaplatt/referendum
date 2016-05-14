@@ -5,15 +5,21 @@ CREATE TABLE `User_tbl` (
  MUser_ID VARCHAR (64) PRIMARY KEY,
  Email_Address VARCHAR(100),
  UPassword VARCHAR(64),
- Econ INT(1),
- Imo INT(1),
- SovandLaw INT(1),
- Jobs INT(1),
- DefenceandSecurity INT(1),
+ Econ INT(1) DEFAULT '0',
+ Imo INT(1) DEFAULT '0',
+ SovandLaw INT(1) DEFAULT '0',
+ Jobs INT(1) DEFAULT '0',
+ DefenceandSecurity INT(1) DEFAULT '0',
  Nochosen INT(8),
  Active BIT(1) NOT NULL DEFAULT '0',
  Initialvote INT(1) NOT NULL
 );
+
+DROP TABLE IF EXISTS 'Mailing_list';
+CREATE TABLE 'Mailing_list' (
+Email_Address VARCHAR(100) NOT NULL PRIMARY KEY
+);
+
 
 DROP TABLE IF EXISTS `Categories_tbl`;
 CREATE TABLE `Categories_tbl` (
