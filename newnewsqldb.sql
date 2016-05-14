@@ -11,7 +11,7 @@ CREATE TABLE `User_tbl` (
  Jobs INT(1) DEFAULT '0',
  DefenceandSecurity INT(1) DEFAULT '0',
  Nochosen INT(8),
- Active BIT(1) NOT NULL DEFAULT '0',
+ Active INT(1) NOT NULL DEFAULT '0',
  Initialvote INT(1) NOT NULL
 );
 
