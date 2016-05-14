@@ -10,13 +10,13 @@ CREATE TABLE `User_tbl` (
  SovandLaw INT(1) DEFAULT '0',
  Jobs INT(1) DEFAULT '0',
  DefenceandSecurity INT(1) DEFAULT '0',
- Nochosen INT(8),
+ Nochosen INT(8) DEFAULT '0',
  Active INT(1) NOT NULL DEFAULT '0',
  Initialvote INT(1) NOT NULL
 );
 
-DROP TABLE IF EXISTS 'Mailing_list';
-CREATE TABLE 'Mailing_list' (
+DROP TABLE IF EXISTS `Mailing_list`;
+CREATE TABLE `Mailing_list` (
 Email_Address VARCHAR(100) NOT NULL PRIMARY KEY
 );
 
