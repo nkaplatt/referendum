@@ -1,0 +1,18 @@
+User-agent: *
+
+Disallow: /js/
+Disallow: /css/
+Disallow: /images/
+Disallow: /graphs/
+Disallow: /PHPMailer/
+Disallow: /404.php
+Disallow: /anonymous.php
+Disallow: /createnewpassword.php
+Disallow: /functions.php
+Disallow: /newfu4.php
+Disallow: /results.php
+Disallow: /sendresetlink.php
+Disallow: /topic-blank-page-copy.php
+Disallow: /verifiedemail.php
+Disallow: /writeresetpassmail.php
+Disallow: /writeverificationemail.php
