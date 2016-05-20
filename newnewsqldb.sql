@@ -12,8 +12,8 @@ CREATE TABLE `User_tbl` (
  DefenceandSecurity INT(1) DEFAULT '0',
  Nochosen INT(8) DEFAULT '0',
  Active INT(1) NOT NULL DEFAULT '0',
- Initialvote INT(1) NOT NULL
- LoggedIN INT(1) DEFAULT '0';
+ Initialvote INT(1) NOT NULL,
+ LoggedIN INT(1) DEFAULT '0'
 );
 
 DROP TABLE IF EXISTS `Mailing_list`;
