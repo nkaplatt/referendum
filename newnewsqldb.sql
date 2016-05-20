@@ -12,7 +12,7 @@ CREATE TABLE `User_tbl` (
  DefenceandSecurity INT(1) DEFAULT '0',
  Nochosen INT(8) DEFAULT '0',
  Active INT(1) NOT NULL DEFAULT '0',
- Initialvote INT(1) NOT NULL,
+ Initialvote INT(1) NOT NULL DEFAULT '0',
  LoggedIN INT(1) DEFAULT '0'
 );
 
