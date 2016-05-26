@@ -5,20 +5,35 @@ CREATE TABLE `User_tbl` (
  MUser_ID VARCHAR (64) PRIMARY KEY,
  Email_Address VARCHAR(100),
  UPassword VARCHAR(64),
- Econ INT(1) DEFAULT '0',
+ Trade INT(1) DEFAULT '0',
  Imo INT(1) DEFAULT '0',
  SovandLaw INT(1) DEFAULT '0',
  Jobs INT(1) DEFAULT '0',
  DefenceandSecurity INT(1) DEFAULT '0',
+ Education INT(1) DEFAULT '0',
+ NHS INT(1) DEFAULT '0',
+ Environment INT(1) DEFAULT '0',
+ Economy INT(1) DEFAULT '0',
+ Leave INT(1) DEFAULT '0',
+ Stay INT(1) DEFAULT '0',
  Nochosen INT(8) DEFAULT '0',
- Active INT(1) NOT NULL DEFAULT '0',
- Initialvote INT(1) NOT NULL DEFAULT '0',
  LoggedIN INT(1) DEFAULT '0'
+);
+
+DROP TABLE IF EXISTS 'Intro_tbl';
+CREATE TABLE 'Intro_tbl' (
+ Intro_ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+ MUser_ID VARCHAR (64),
+ Emoticon_Number INT NOT NULL,
+ Emoticon_Type INT NOT NULL,
+ Choice_Number INT NOT NULL, 
+ Choice_Type INT(4),
+ FOREIGN KEY (MUser_ID) REFERENCES User_tbl(MUser_ID)
 );
 
 DROP TABLE IF EXISTS `Mailing_list`;
 CREATE TABLE `Mailing_list` (
-Email_Address VARCHAR(100) NOT NULL PRIMARY KEY
+ Email_Address VARCHAR(100) NOT NULL PRIMARY KEY
 );
 
 
