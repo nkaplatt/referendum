@@ -24,9 +24,9 @@ DROP TABLE IF EXISTS `Intro_tbl`;
 CREATE TABLE `Intro_tbl` (
  Intro_ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
  MUser_ID VARCHAR (64),
- Emoticon_Number INT NOT NULL,
- Emoticon_Type INT NOT NULL,
- Choice_Number INT NOT NULL, 
+ Emoticon_Number INT,
+ Emoticon_Type INT,
+ Choice_Number INT, 
  Choice_Type INT(4),
  FOREIGN KEY (MUser_ID) REFERENCES User_tbl(MUser_ID)
 );
