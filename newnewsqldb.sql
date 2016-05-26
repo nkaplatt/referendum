@@ -20,8 +20,8 @@ CREATE TABLE `User_tbl` (
  LoggedIN INT(1) DEFAULT '0'
 );
 
-DROP TABLE IF EXISTS 'Intro_tbl';
-CREATE TABLE 'Intro_tbl' (
+DROP TABLE IF EXISTS `Intro_tbl`;
+CREATE TABLE `Intro_tbl` (
  Intro_ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
  MUser_ID VARCHAR (64),
  Emoticon_Number INT NOT NULL,
