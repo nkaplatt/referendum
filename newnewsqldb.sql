@@ -16,26 +16,14 @@ CREATE TABLE `User_tbl` (
  Economy INT(1) DEFAULT '0',
  Leave INT(1) DEFAULT '0',
  Stay INT(1) DEFAULT '0',
- Nochosen INT(8) DEFAULT '0',
+ Allchosen INT(1) DEFAULT '0',
  LoggedIN INT(1) DEFAULT '0'
-);
-
-DROP TABLE IF EXISTS `Intro_tbl`;
-CREATE TABLE `Intro_tbl` (
- Intro_ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
- MUser_ID VARCHAR (64),
- Emoticon_Number INT,
- Emoticon_Type INT,
- Choice_Number INT, 
- Choice_Type INT(4),
- FOREIGN KEY (MUser_ID) REFERENCES User_tbl(MUser_ID)
 );
 
 DROP TABLE IF EXISTS `Mailing_list`;
 CREATE TABLE `Mailing_list` (
  Email_Address VARCHAR(100) NOT NULL PRIMARY KEY
 );
-
 
 DROP TABLE IF EXISTS `Categories_tbl`;
 CREATE TABLE `Categories_tbl` (
