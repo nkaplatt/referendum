@@ -14,9 +14,9 @@ CREATE TABLE `User_tbl` (
  NHS INT(1) DEFAULT '0',
  Environment INT(1) DEFAULT '0',
  Economy INT(1) DEFAULT '0',
- Leavee INT(1) DEFAULT '0',
+ Leave INT(1) DEFAULT '0',
  Stay INT(1) DEFAULT '0',
- Nochosen INT(8) DEFAULT '0',
+ Allchosen INT(8) DEFAULT '0',
  LoggedIN INT(1) DEFAULT '0'
 );
 
